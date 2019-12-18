@@ -248,7 +248,6 @@ MonoBehaviour:
   player: {fileID: 0}
   stick: {fileID: 1677642107}
   joystickDir: {x: 0, y: 0}
-  isMoving: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +500,7 @@ GameObject:
   - component: {fileID: 1636206180}
   - component: {fileID: 1636206178}
   - component: {fileID: 1636206177}
+  - component: {fileID: 1636206179}
   m_Layer: 0
   m_Name: '[Script]Player'
   m_TagString: Player
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4612b2bfc219db4aa119d217d3da915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDirection: {x: 0, y: 0}
+  Modelobject: {fileID: 1697584144}
 --- !u!114 &1636206178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +533,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c66721a7803e741c9b47d8bc80f33694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 0}
+  stickdistance: 0
+  isMoving: 0
+--- !u!143 &1636206179
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636206176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.5
+  m_Radius: 0.2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!4 &1636206180
 Transform:
   m_ObjectHideFlags: 0
@@ -541,7 +562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636206176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 143439887}
@@ -621,6 +642,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677642106}
   m_CullTransparentMesh: 0
+--- !u!1 &1697584144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6678900457010439258, guid: def9017c0cad5094682574c5fd032cdc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3561621469519015472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1766844927
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +676,7 @@ Transform:
   m_GameObject: {fileID: 1766844927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 162816363}
   m_RootOrder: 0
@@ -836,6 +863,16 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3748888556057686771, guid: def9017c0cad5094682574c5fd032cdc,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 59c054db92b95cd4ba87cffa18bbb060, type: 2}
+    - target: {fileID: 3748888556057686771, guid: def9017c0cad5094682574c5fd032cdc,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: a4b047ba24a6f374f9bbd3a5053e2b52, type: 3}
     - target: {fileID: 6678900457010439258, guid: def9017c0cad5094682574c5fd032cdc,
         type: 3}
       propertyPath: m_Name
@@ -849,12 +886,12 @@ PrefabInstance:
     - target: {fileID: 6681468547433305814, guid: def9017c0cad5094682574c5fd032cdc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.31900117
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6681468547433305814, guid: def9017c0cad5094682574c5fd032cdc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0203396
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6681468547433305814, guid: def9017c0cad5094682574c5fd032cdc,
         type: 3}
@@ -896,5 +933,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3366973544308544315, guid: def9017c0cad5094682574c5fd032cdc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: def9017c0cad5094682574c5fd032cdc, type: 3}

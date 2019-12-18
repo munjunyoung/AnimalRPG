@@ -8,7 +8,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     protected virtual void Awake()
     {
-        characterController = GetComponentInChildren<CharacterController>();
+        characterController = GetComponent<CharacterController>();
     }
 
     public virtual void Move(Vector3 dir)
@@ -18,6 +18,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     public virtual void Move ()
     {
+
     }
 
     public virtual void Attack()

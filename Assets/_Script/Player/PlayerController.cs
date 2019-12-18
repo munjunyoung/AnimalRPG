@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+enum UNIT_STATE { Idle, Move, Attack }
 [RequireComponent(typeof(PlayerBehaviour))]
 public class PlayerController : MonoBehaviour
 {
-    private GameObject Model;
+    [SerializeField]
+    private GameObject Modelobject;
     private PlayerBehaviour Pb;
     private Animator anim;
-    
-    //Move
-    public Vector2 moveDirection = Vector2.zero;
-    private float speed = 1f;
-    
+    private UNIT_STATE playerState;
     private void Start()
     {
+        
         Pb = GetComponent<PlayerBehaviour>();
-        Model = transform.Find("[Prefab]Model").gameObject;
-        anim = Model.GetComponent<Animator>();
-
-    }
-
-    private void FixedUpdate()
-    {
-        Pb.Move(new Vector3(moveDirection.x, 0, moveDirection.y));
-    }
-
-
-    private void GetDirInKeyboard()
-    {
-
+        anim = Modelobject.GetComponent<Animator>();
     }
     
+    private void LateUpdate()
+    {
+        if (Pb.isMoving)
+        {
+            anim.speed = Pb.stickdistance;
+            playerState = UNIT_STATE.Move;
+        }
+        else
+        {
+            anim.speed = 1;
+            playerState = UNIT_STATE.Idle;
+        }
+        
+        anim.SetFloat("UnitState", (float)playerState);
+    }
+
 }

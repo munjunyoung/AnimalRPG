@@ -11,13 +11,34 @@ public class CharacterBehaviour : MonoBehaviour
         characterController = GetComponentInChildren<CharacterController>();
     }
 
+    protected virtual void Start()
+    {
+
+    }
+
+    protected virtual void Update()
+    {
+
+    }
+
+    protected virtual void FixedUpdate()
+    {
+
+    }
+
     public virtual void Move(Vector3 dir)
     {
         
     }
 
-    public virtual void Move ()
+    public virtual void Idle()
     {
+
+    }
+
+    public virtual void Move()
+    {
+
     }
 
     public virtual void Attack()
@@ -25,7 +46,27 @@ public class CharacterBehaviour : MonoBehaviour
 
     }
 
-    public virtual void CastSkill()
+    public virtual void Damaged()
+    {
+
+    }
+
+    public virtual void Dead()
+    {
+
+    }
+
+    public virtual void OnAnimDamageTo()
+    {
+
+    }
+
+    public virtual void OnAnimStartAttack()
+    {
+
+    }
+
+    public virtual void OnAnimEndAttack()
     {
 
     }

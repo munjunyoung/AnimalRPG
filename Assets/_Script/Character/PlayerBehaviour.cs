@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerBehaviour : CharacterBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Move(Vector3 dir)
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        base.Move(dir);
+        characterController.transform.rotation = Quaternion.LookRotation(dir);
+        dir.y -= 9.8f * Time.deltaTime; 
+        characterController.Move(dir * Time.deltaTime);    
         
     }
 }

@@ -2,17 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerBehaviour))]
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameObject Model;
+    private PlayerBehaviour Pb;
+    private Animator anim;
+    
+    //Move
+    public Vector2 moveDirection = Vector2.zero;
+    private float speed = 1f;
+    
+    private void Start()
     {
-        
+        Pb = GetComponent<PlayerBehaviour>();
+        Model = transform.Find("[Prefab]Model").gameObject;
+        anim = Model.GetComponent<Animator>();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        Pb.Move(new Vector3(moveDirection.x, 0, moveDirection.y));
     }
+
+
+    private void GetDirInKeyboard()
+    {
+
+    }
+    
 }

@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected CharacterController characterController;
+
+    protected virtual void Awake()
+    {
+        characterController = GetComponentInChildren<CharacterController>();
+    }
+
+    public virtual void Move(Vector3 dir)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Move ()
     {
-        
+    }
+
+    public virtual void Attack()
+    {
+
+    }
+
+    public virtual void CastSkill()
+    {
+
     }
 }

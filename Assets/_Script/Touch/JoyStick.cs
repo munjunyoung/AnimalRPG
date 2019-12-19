@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class JoyStick : MonoBehaviour, IEndDragHandler , IDragHandler
+using UnityEngine.UI;
+public class JoyStick : MonoBehaviour, IEndDragHandler , IDragHandler, IBeginDragHandler
 {
     [SerializeField]
     private PlayerBehaviour player;
@@ -11,6 +12,11 @@ public class JoyStick : MonoBehaviour, IEndDragHandler , IDragHandler
     private Vector2 stickStartPos;
     public Vector2 joystickDir;
     private float radius;
+    //PressColor
+    private Image stickImage;
+    private Color originalColor;
+    private Color pressColor;
+
 
     private void Start()
     {
@@ -18,8 +24,17 @@ public class JoyStick : MonoBehaviour, IEndDragHandler , IDragHandler
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
         //스틱 반지름 scale은 처리 하지 않음
         radius = GetComponent<RectTransform>().sizeDelta.y * 0.5f;
+        //PressColor
+        stickImage = stick.GetComponent<Image>();
+        originalColor = stickImage.color;
+        pressColor = originalColor * 0.6f;
     }
-    
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        stickImage.color = pressColor;
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         //방향벡터
@@ -37,6 +52,7 @@ public class JoyStick : MonoBehaviour, IEndDragHandler , IDragHandler
         stick.position = stickStartPos;
         player.moveDirection = new Vector3(0, 0, 0);
         player.isMoving = false;
-
+        stickImage.color = originalColor;
     }
+
 }

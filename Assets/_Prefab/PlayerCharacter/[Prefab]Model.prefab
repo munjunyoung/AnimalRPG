@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6681468547433305814}
   - component: {fileID: 3748888556057686771}
+  - component: {fileID: 5653646906489888444}
   m_Layer: 0
   m_Name: '[Prefab]Model'
   m_TagString: Player
@@ -74,8 +75,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6678900457010439258}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: a4b047ba24a6f374f9bbd3a5053e2b52, type: 3}
+  m_Controller: {fileID: 9100000, guid: 59c054db92b95cd4ba87cffa18bbb060, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -84,6 +85,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5653646906489888444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678900457010439258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69a37fc28e124ed88dcbeea71a8f2be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentCharacter: {fileID: 0}
 --- !u!1 &6679164524248222864
 GameObject:
   m_ObjectHideFlags: 0

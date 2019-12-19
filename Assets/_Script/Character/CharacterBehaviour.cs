@@ -5,10 +5,13 @@ using UnityEngine;
 public class CharacterBehaviour : MonoBehaviour
 {
     protected CharacterController characterController;
+    protected CharacterAnimReceiver characterAnimReceiver;
 
     protected virtual void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        if(characterAnimReceiver==null)
+            characterAnimReceiver = GetComponentInChildren<CharacterAnimReceiver>();
     }
 
     protected virtual void Start()
@@ -60,8 +63,13 @@ public class CharacterBehaviour : MonoBehaviour
     {
 
     }
-
+    
     public virtual void OnAnimStartAttack()
+    {
+
+    }
+
+    public virtual void OnAnimHitAttack()
     {
 
     }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CharacterAnimReceiver : MonoBehaviour
 {
-    public CharacterBehaviour parentCharacter;
+    
+    private CharacterBehaviour parentCharacter;
 
     private void Start()
     {
@@ -34,5 +35,29 @@ public class CharacterAnimReceiver : MonoBehaviour
     public virtual void OnAnimEndAttack()
     {
         parentCharacter.OnAnimEndAttack();
+    }
+
+    /// <summary>
+    /// NOTE : 스킬 시작
+    /// </summary>
+    public virtual void OnAnimStartSkill()
+    {
+        parentCharacter.OnAnimStartSkill();
+    }
+
+    /// <summary>
+    /// NOTE : 스킬 피격
+    /// </summary>
+    public virtual void OnAnimDamageToSkill()
+    {
+        parentCharacter.OnAnimDamageToSkill();
+    }
+
+    /// <summary>
+    /// NOTE : 스킬 종료
+    /// </summary>
+    public virtual void OnAnimEndSkill()
+    {
+        parentCharacter.OnAnimEndSkill();
     }
 }

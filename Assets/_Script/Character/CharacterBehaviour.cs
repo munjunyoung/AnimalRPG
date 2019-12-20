@@ -49,7 +49,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     }
 
-    public virtual void Damaged()
+    public virtual void TakeDamage(int damage)
     {
 
     }
@@ -59,22 +59,32 @@ public class CharacterBehaviour : MonoBehaviour
 
     }
 
-    public virtual void OnAnimDamageTo()
-    {
-
-    }
-    
     public virtual void OnAnimStartAttack()
     {
 
     }
 
-    public virtual void OnAnimHitAttack()
+    public virtual void OnAnimDamageTo()
+    {
+
+    }
+    
+    public virtual void OnAnimEndAttack()
     {
 
     }
 
-    public virtual void OnAnimEndAttack()
+    public virtual void OnAnimStartSkill()
+    {
+
+    }
+
+    public virtual void OnAnimDamageToSkill()
+    {
+
+    }
+
+    public virtual void OnAnimEndSkill()
     {
 
     }

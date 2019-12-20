@@ -58,9 +58,9 @@ public class EnemyBehaviour : CharacterBehaviour
         animator.SetInteger(animInteger, 5);
     }
 
-    public override void Damaged()
+    public override void TakeDamage(int damage)
     {
-        base.Damaged();
+        base.TakeDamage(damage);
         animator.SetInteger(animInteger, 7);
     }
 

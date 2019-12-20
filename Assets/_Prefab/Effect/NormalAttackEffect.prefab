@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6862087334057192357}
   - component: {fileID: 6862087334057192354}
   - component: {fileID: 2616308095615767386}
-  - component: {fileID: 402349988781699966}
+  - component: {fileID: 3982453150559813273}
   m_Layer: 0
   m_Name: NormalAttackEffect
   m_TagString: Untagged
@@ -285,7 +285,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     startSize:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -301,8 +301,17 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
+          time: 0.6303804
+          value: 0.9966376
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
           time: 1
-          value: 1
+          value: 0.16835022
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -338,7 +347,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -391,7 +400,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -602,7 +611,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 10
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -867,7 +876,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 15
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -920,7 +929,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4730,8 +4739,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -485111795
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -4769,7 +4778,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.7100002
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &402349988781699966
+--- !u!114 &3982453150559813273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4778,8 +4787,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6862087334057192355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 913b66020ae61964c896ddc80a617ace, type: 3}
+  m_Script: {fileID: 11500000, guid: f54b9a252d5d66e43b283bb4337168e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pb: {fileID: 0}
-  damage: 0

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum PlayerState { Idle, Move, Attack, Skill }
+enum PlayerState { Idle, Move, Attack, Skill, Dead }
 public class PlayerBehaviour : CharacterBehaviour
 {
-    [SerializeField]
-    public Animator anim;
+    private Animator anim;
     private PlayerState playerState;
     //Ability
-    public AbilityData ability;
+    public PlayerStat ability;
     private int _CurrentHp;
     public int currentHP
     {
@@ -24,9 +23,9 @@ public class PlayerBehaviour : CharacterBehaviour
             _CurrentHp = value;
             if (_CurrentHp < 0)
                 _CurrentHp = 0;
-
+            else if (_CurrentHp > ability.totalHp)
+                _CurrentHp = ability.totalHp;
         }
-        
     }
 
     private int CurrentMp;
@@ -38,13 +37,17 @@ public class PlayerBehaviour : CharacterBehaviour
     //Attack
     [SerializeField]
     private Transform NormalAttackEffectPosition;
-    private EffectHitSc[] NormalAttackEffectPooling;
-    private int effectCount = 0;
+    private AttackEffectSc[] NormalAttackEffectArray;
+    private int normalAttackEffectCount = 0;
+    private HitEffectOffSc[] normalAttackHitEffectArray;
+    private int normalAttackHitEffectCount = 0;
     //Skill
     [SerializeField]
     private Transform skillEffectPosition;
-    private EffectHitSc skillEffect;
-
+    private AttackEffectSc skillEffect;
+    private HitEffectOffSc[] skillAttackHitEffectArray;
+    private int skillAttackHitEffectCount = 0;
+    
     public bool isMoving = false;
     public bool isStartAttack = false;
     public bool isStartSkill = false;
@@ -53,7 +56,7 @@ public class PlayerBehaviour : CharacterBehaviour
     protected override void Awake()
     {
         base.Awake();
-        ability = new AbilityData();
+        ability = new PlayerStat();
         anim = characterAnimReceiver.GetComponent<Animator>();
     }
 
@@ -61,18 +64,24 @@ public class PlayerBehaviour : CharacterBehaviour
     {
         base.Start();
         
-        //Attack
-        NormalAttackEffectPooling = NormalAttackEffectPosition.GetComponentsInChildren<EffectHitSc>(true);
-        foreach(var ep in NormalAttackEffectPooling)
+        //Attack Effect
+        NormalAttackEffectArray = NormalAttackEffectPosition.GetComponentsInChildren<AttackEffectSc>(true);
+        foreach(var ep in NormalAttackEffectArray)
             ep.SetData(this);
-        
-        //Skill
+        var normalHitParent = transform.Find("SkillAttackHitParent").transform;
+        normalAttackHitEffectArray = normalHitParent.GetComponentsInChildren<HitEffectOffSc>(true);
+
+        //Skill Effect
         skillEffect = skillEffectPosition.GetComponentInChildren<SkillAttackEffectHitSc>(true);
         skillEffect.SetData(this);
+        var skillHitparent = transform.Find("NormalAttackHitParent").transform;
+        skillAttackHitEffectArray = skillHitparent.GetComponentsInChildren<HitEffectOffSc>(true);
     }
     
     protected override void FixedUpdate()
     {
+        if (!isAlive)
+            return;
         Move();
     }
 
@@ -121,9 +130,9 @@ public class PlayerBehaviour : CharacterBehaviour
     public override void OnAnimDamageTo()
     {
         base.OnAnimDamageTo();
-        NormalAttackEffectPooling[effectCount].gameObject.SetActive(true);
-        effectCount++;
-        effectCount = effectCount % NormalAttackEffectPooling.Length;
+        NormalAttackEffectArray[normalAttackEffectCount].gameObject.SetActive(true);
+        normalAttackEffectCount++;
+        normalAttackEffectCount = normalAttackEffectCount % NormalAttackEffectArray.Length;
     }
 
     public override void OnAnimEndAttack()
@@ -136,7 +145,7 @@ public class PlayerBehaviour : CharacterBehaviour
     public override void OnAnimStartSkill()
     {
         base.OnAnimStartSkill();
-        UIManager.instance.StartSkillCoolTime(ability.skillCoolTime);
+        PlayerProfileUIManager.instance.StartSkillCoolTime(ability.skillCoolTime);
         //쿨타임 실행
         //애니매이션 실행
     }
@@ -154,6 +163,44 @@ public class PlayerBehaviour : CharacterBehaviour
     }
     #endregion
 
+    #region TakeDamage
+    /// <summary>
+    /// NOTE : 데미지 처리 및 애니매이션 실행, 죽음
+    /// </summary>
+    /// <param name="damage"></param>
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        anim.SetTrigger("TakeDamage");
+        currentHP -= damage;
+        if (currentHP == 0)
+        {
+            Dead();
+        }
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
+        isAlive = false;
+        anim.SetTrigger("Dead");
+
+    }
+
+    public void NormalAttackHitEffectPoolingProcess(Vector3 position)
+    {
+        normalAttackHitEffectArray[normalAttackHitEffectCount].gameObject.SetActive(true);
+        normalAttackHitEffectCount++;
+        normalAttackHitEffectCount %= normalAttackHitEffectArray.Length;
+    }
+
+    public void SkillHitEffectPoolingProcess(Vector3 position)
+    {
+        skillAttackHitEffectArray[skillAttackHitEffectCount].gameObject.SetActive(true);
+        skillAttackHitEffectCount++;
+        skillAttackHitEffectCount %= skillAttackHitEffectArray.Length;
+    }
+    #endregion
     #region Animation
     private void SetAnimation()
     {
@@ -188,36 +235,5 @@ public class PlayerBehaviour : CharacterBehaviour
         
     }
 
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-
-    }
     #endregion
-}
-
-public class AbilityData
-{
-    public int Level;
-    public int totalHp;
-    public int totalMp;
-
-    public int moveSpeed;
-
-    public int AttackSpeed;
-    public int AttackDamage;
-
-    public int skillDamage;
-    public float skillCoolTime;
-
-    public AbilityData()
-    {
-        totalHp = 100;
-        totalMp = 100;
-        moveSpeed = 5;
-        AttackSpeed = 1;
-        AttackDamage = 50;
-        skillCoolTime = 5f;
-        skillDamage = 200;
-    }
 }

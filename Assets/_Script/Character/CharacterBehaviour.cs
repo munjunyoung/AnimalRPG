@@ -7,6 +7,8 @@ public class CharacterBehaviour : MonoBehaviour
     protected CharacterController characterController;
     protected CharacterAnimReceiver characterAnimReceiver;
 
+    protected bool isAlive = true;
+
     protected virtual void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -51,7 +53,8 @@ public class CharacterBehaviour : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-
+        if (!isAlive)
+            return;
     }
 
     public virtual void Dead()

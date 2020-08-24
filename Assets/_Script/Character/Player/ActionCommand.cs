@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//text
 public class ActionCommand 
 {
     public virtual void ExecuteAction(GameObject actor) { }
